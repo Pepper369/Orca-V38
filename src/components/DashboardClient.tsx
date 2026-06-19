@@ -369,7 +369,10 @@ export function DashboardClient({ data: initialData }: { data: DashboardData }) 
     if (exporting) return;
     setExporting(type);
     setExportMode(true);
-    await new Promise((resolve) => setTimeout(resolve, 600));
+    // Wait for all tabs to render into DOM
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+    window.scrollTo(0, 0);
+    await new Promise((resolve) => setTimeout(resolve, 200));
     try {
       const element = reportRef.current;
       if (!element) return;
